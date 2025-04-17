@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Relationships Message </title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        // Handle hash changes
+        function checkHash() {
+            if (window.location.hash === '#main-content') {
+                document.getElementById('start-page').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                // Load scenarios immediately
+                if (typeof loadRandomScenario === 'function') {
+                    loadRandomScenario();
+                }
+            }
+        }
+
+        // Initial check
+        document.addEventListener('DOMContentLoaded', checkHash);
+        
+        // Listen for hash changes
+        window.addEventListener('hashchange', checkHash);
+    </script>
+</head>
+<body>
+    <div class="start-page" id="start-page">
+        <div class="start-container">
+            <h1>Heart Relationships Message</h1>
+            <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" required autocomplete="family-name">
+            </div>
+            <div class="form-group">
+                <label for="email">School Email:</label>
+                <input type="email" id="email" required 
+                       pattern=".+@hwdsb\.on\.ca"
+                       placeholder="name@hwdsb.on.ca"
+                       autocomplete="email">
+            </div>
+            <button onclick="startSession()">Begin Program</button>
+            <p class="error-message" id="error-message"></p>
+        </div>
+    </div>
+
+    <div class="container" id="main-content" style="display: none;">
+        <div class="chat-messages" id="chat"></div>
+        <div class="choices" id="choices"></div>
+        <div class="completion" id="completion" style="display: none;">
+            <h2>Great Choice! 🎉</h2>
+            <button onclick="loadRandomScenario()">Try Another Scenario</button>
+        </div>
+    </div>
+
+    <div id="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading Program...</p>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

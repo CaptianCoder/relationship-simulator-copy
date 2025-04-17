@@ -1,0 +1,99 @@
+[
+    {
+        "id": "persistent-contact",
+        "steps": [
+            { "type": "message", "from": "them", "text": "Hey I had a great time. We should do it again soon :)", "delay": 2000 },
+            { "type": "message", "from": "you", "text": "Hey. Sorry, I had a nice time but I thought about things and I'm not interested in meeting again. I just don't think we'd work out. But I wish you the best", "delay": 3000 },
+            { "type": "message", "from": "them", "text": "I'm sorry to hear that... I really liked spending time with you.", "delay": 2000 },
+            { "type": "message", "from": "them", "text": "Hey, can we talk?", "delay": 1500 },
+            { "type": "message", "from": "them", "text": "Hello?", "delay": 1500 },
+            { "type": "message", "from": "them", "text": "Hey, how are you?", "delay": 1500 },
+            { "type": "message", "from": "them", "text": "I miss talking to you. Can you text me back?", "delay": 2000 },
+            {
+                "type": "choices",
+                "options": [
+                    { "text": "Hi, I told you I'm not interested, please respect that. We met once, please move on.", "result": "good" },
+                    { "text": "BLOCK USER", "result": "block" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "pressure-for-content",
+        "steps": [
+            { "type": "message", "from": "them", "text": "Hey, let's meet soon. We can get some drinks and go back to my place ;)", "delay": 2000 },
+            { "type": "message", "from": "you", "text": "We haven't even had a conversation yet. Why would I do that with someone I don't know?", "delay": 2500 },
+            { "type": "message", "from": "them", "text": "What? You don't like to have some fun?", "delay": 1500 },
+            { "type": "message", "from": "you", "text": "Not with someone I don't know. And I'm not on here looking 'for fun' like it says in my profile.", "delay": 3000 },
+            { "type": "message", "from": "them", "text": "I really want to see you. Can you send me a video of you?", "delay": 2000 },
+            { "type": "message", "from": "you", "text": "Sorry... I don't feel comfortable with that", "delay": 1500 },
+            { "type": "message", "from": "them", "text": "It's ok, it's just between us. I want to show you how turned on you get me", "delay": 2500 },
+            { "type": "message", "from": "you", "text": "Sorry...", "delay": 1000 },
+            { "type": "message", "from": "them", "text": "Cmon, it's not a big deal", "delay": 1500 },
+            { "type": "message", "from": "you", "text": "It is to me, and I don't appreciate being pressured into something I'm not comfortable with", "delay": 3000 },
+            { "type": "message", "from": "them", "text": "What if I send you something first? [PIC]", "delay": 2000 },
+            {
+                "type": "choices",
+                "options": [
+                    { "text": "Just because you sent something doesn't mean I have to. I would have said NO. Deal with that on your own.", "result": "good" },
+                    { "text": "BLOCK USER", "result": "block" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "suspicion-and-pressure",
+        "steps": [
+            { "type": "message", "from": "you", "text": "Sorry, I have to cancel our meet up :(", "delay": 1500 },
+            { "type": "message", "from": "them", "text": "Again? You've already had to cancel twice.", "delay": 1500 },
+            { "type": "message", "from": "you", "text": "I know, I'm sorry :( My friend had an emergency and needs me to pick up their dog", "delay": 2500 },
+            { "type": "message", "from": "them", "text": "I love dogs, we can meet up and I can help you out with him.", "delay": 2000 },
+            { "type": "message", "from": "you", "text": "No that's ok, it's better I do it on my own cuz he knows me. Don't worry, we'll meet soon :)", "delay": 3000 },
+            { "type": "message", "from": "them", "text": "I'm starting to think we're never gonna meet. And we haven't even been able to have a video call cuz you haven't fixed your camera. I'm wondering if you're even who you say you are.", "delay": 4000 },
+            {
+                "type": "choices",
+                "options": [
+                    { "text": "Call out their suspicion", "result": "good" },
+                    { "text": "BLOCK USER", "result": "block" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "age-difference-pressure",
+        "steps": [
+            { "type": "message", "from": "them", "text": "I know I'm a little older than you, but it's not that big a deal. You're really special.", "delay": 3000 },
+            { "type": "message", "from": "them", "text": "I want to make you happy. Let me buy you lunch, my treat", "delay": 2500 },
+            { "type": "message", "from": "you", "text": "Thank you, but you don't have to", "delay": 1500 },
+            { "type": "message", "from": "them", "text": "I want to, I want to spoil you.", "delay": 1500 },
+            { "type": "message", "from": "you", "text": "Thanks. I don't know though, I think our age difference is a little big", "delay": 2500 },
+            { "type": "message", "from": "them", "text": "It's okay, I'll wait for you until you turn 16 to do anything. I just want to spend time with you and take you out for meals", "delay": 4000 },
+            {
+                "type": "choices",
+                "options": [
+                    { "text": "I don't think my parents would like that", "result": "good" },
+                    { "text": "BLOCK USER", "result": "block" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "personal-info-pressure",
+        "steps": [
+            { "type": "message", "from": "them", "text": "Since we've been talking a few days, can I get your number?", "delay": 2000 },
+            { "type": "message", "from": "you", "text": "Why?", "delay": 1000 },
+            { "type": "message", "from": "them", "text": "It'll be easier to talk", "delay": 1500 },
+            { "type": "message", "from": "you", "text": "Messaging on here is fine right now", "delay": 1500 },
+            { "type": "message", "from": "them", "text": "I was just thinking I could call you", "delay": 1500 },
+            { "type": "message", "from": "you", "text": "Sorry, I don't like to give out my number until I meet in person. Texting is fine right now", "delay": 3000 },
+            { "type": "message", "from": "them", "text": "It's not fine for me. You can't even consider what I want?", "delay": 2500 },
+            {
+                "type": "choices",
+                "options": [
+                    { "text": "My number is personal information and I'm not giving it to someone I just met", "result": "good" },
+                    { "text": "BLOCK USER", "result": "block" }
+                ]
+            }
+        ]
+    }
+]

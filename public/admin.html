@@ -1,0 +1,175 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HWDSB Program Admin</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --danger: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .refresh-btn {
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            margin: 15px 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Program Analytics Dashboard</h1>
+    <button class="refresh-btn" onclick="loadStats()">🔄 Refresh Data</button>
+    
+    <div class="dashboard" id="dashboard">
+        <!-- Stats will be inserted here -->
+    </div>
+
+    <h2>Recent Participants</h2>
+    <table id="participantsTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Completed</th>
+                <th>Eligible</th>
+                <th>Registration Date</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+
+            // Admin authentication check
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const response = await fetch('/admin/stats', {
+                credentials: 'include'
+            });
+            
+            if (!response.ok) {
+                window.location.href = '/';
+            } else {
+                loadStats();
+                setInterval(loadStats, 30000);
+            }
+        } catch (error) {
+            window.location.href = '/';
+        }
+    });
+
+        async function loadStats() {
+            try {
+                const response = await fetch('/admin/stats', {
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) throw new Error('Failed to load stats');
+                
+                const data = await response.json();
+                updateDashboard(data);
+                updateParticipantsTable(data.recentParticipants);
+
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        }
+
+        function updateDashboard(stats) {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.innerHTML = `
+                <div class="stat-card">
+                    <h3>📊 Total Participants</h3>
+                    <p class="stat-number">${stats.totalParticipants}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>✅ Completed</h3>
+                    <p class="stat-number">${stats.completedCount}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>🌟 Eligible</h3>
+                    <p class="stat-number">${stats.eligibleCount}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>⏱ Avg. Time</h3>
+                    <p class="stat-number">${stats.avgTime}</p>
+                </div>
+            `;
+        }
+
+        function updateParticipantsTable(participants) {
+            const tbody = document.querySelector('#participantsTable tbody');
+            tbody.innerHTML = participants.map(p => `
+                <tr>
+                    <td>${p.firstName} ${p.lastName}</td>
+                    <td>${p.email}</td>
+                    <td>${p.completed ? '✅' : '❌'}</td>
+                    <td>${p.eligible ? '🌟' : '🚫'}</td>
+                    <td>${new Date(p.timestamp).toLocaleDateString()}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Load stats on page load and every 30 seconds
+        loadStats();
+        setInterval(loadStats, 30000);
+    </script>
+</body>
+</html>
